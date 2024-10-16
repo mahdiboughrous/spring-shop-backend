@@ -1,9 +1,12 @@
-package com.boughrous.product_composite_service;
+package com.boughrous.productcompositeservice;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 public class ProductCompositeServiceApplication {
 
 	public static void main(String[] args) {

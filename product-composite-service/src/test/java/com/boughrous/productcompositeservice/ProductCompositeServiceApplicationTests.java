@@ -1,4 +1,4 @@
-package com.boughrous.product_composite_service;
+package com.boughrous.productcompositeservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
