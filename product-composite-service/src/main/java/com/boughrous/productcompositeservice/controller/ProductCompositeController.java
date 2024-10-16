@@ -17,6 +17,7 @@ import com.boughrous.productcompositeservice.dto.CreateProductRequest;
 import com.boughrous.productcompositeservice.dto.CreateRecommendationRequest;
 import com.boughrous.productcompositeservice.dto.CreateReviewRequest;
 import com.boughrous.productcompositeservice.models.Product;
+import com.boughrous.productcompositeservice.models.ProductComposite;
 import com.boughrous.productcompositeservice.models.Recommendation;
 import com.boughrous.productcompositeservice.models.Review;
 import com.boughrous.productcompositeservice.service.ProductCompositeService;
@@ -38,62 +39,75 @@ public class ProductCompositeController {
     private final RecommendationService recommendationService;
     private final Logger logger = LoggerFactory.getLogger(ProductCompositeController.class); 
 
+    // get all product composites
+    @GetMapping
+    public ResponseEntity<List<ProductComposite>> getAllProductComposites() {
+        logger.info("Getting all product composites");
+        List<ProductComposite> productComposites = productCompositeService.getAllProductComposites();
+        return ResponseEntity.ok().body(productComposites);
+    }
+
     // get all products
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
         logger.info("Getting all products");
         List<Product> products =  productService.getAllProducts();
         return ResponseEntity.ok().body(products);
-
     }
 
     // get product by id
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProductById(@RequestParam int id) {
-
         Product product = productService.getProductById(id);
         return ResponseEntity.ok().body(product);
     }
 
     // create product
     @PostMapping("/products")
-    public void createProduct(@RequestBody CreateProductRequest product) {
+    public ResponseEntity<Void> createProduct(@RequestBody CreateProductRequest product) {
         productService.createProduct(product);
+        return ResponseEntity.ok().build();
     }
 
     // get all reviews
     @GetMapping("/reviews")
-    public List<Review> getAllReviews() {
-        return reviewService.getAllReviews();
+    public ResponseEntity<List<Review>> getAllReviews() {
+        List<Review> reviews = reviewService.getAllReviews();
+        return ResponseEntity.ok().body(reviews);
     }
 
     // get review by id
     @GetMapping("/reviews/{id}")
-    public Review getReviewById(@RequestParam int id) {
-        return reviewService.getReviewById(id);
+    public ResponseEntity<Review> getReviewById(@RequestParam int id) {
+        Review review = reviewService.getReviewById(id);
+        return ResponseEntity.ok().body(review);
     }
 
     // create review
     @PostMapping("/reviews")
-    public void createReview(@RequestBody CreateReviewRequest review) {
+    public ResponseEntity<Void> createReview(@RequestBody CreateReviewRequest review) {
         reviewService.createReview(review);
+        return ResponseEntity.ok().build();
     }
 
     // get all recommendations
     @GetMapping("/recommendations")
-    public List<Recommendation> getAllRecommendations() {
-        return recommendationService.getAllRecommendations();
+    public ResponseEntity<List<Recommendation>> getAllRecommendations() {
+        List<Recommendation> recommendations = recommendationService.getAllRecommendations();
+        return ResponseEntity.ok().body(recommendations);
     }
 
     // get recommendation by id
     @GetMapping("/recommendations/{id}")
-    public Recommendation getRecommendationById(@RequestParam int id) {
-        return recommendationService.getRecommendationById(id);
+    public ResponseEntity<Recommendation> getRecommendationById(@RequestParam int id) {
+        Recommendation recommendation = recommendationService.getRecommendationById(id);
+        return ResponseEntity.ok().body(recommendation);
     }
 
     // create recommendation
     @PostMapping("/recommendations")
-    public void createRecommendation(@RequestBody CreateRecommendationRequest recommendation) {
+    public ResponseEntity<Void> createRecommendation(@RequestBody CreateRecommendationRequest recommendation) {
         recommendationService.createRecommendation(recommendation);
+        return ResponseEntity.ok().build();
     }
 }

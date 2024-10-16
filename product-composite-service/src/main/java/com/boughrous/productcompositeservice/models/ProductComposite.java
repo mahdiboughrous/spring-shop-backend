@@ -9,10 +9,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+public class ProductComposite {
 
-public class ProductComposite extends Product{
-
+    private Product product;
     private List<Recommendation> recommendations;
     private List<Review> reviews;
-    
+
+    // Constructor to initialize all fields
+    public ProductComposite(Product product, List<Review> reviews, List<Recommendation> recommendations) {
+        this.product = product;
+        this.recommendations = recommendations;
+        this.reviews = reviews;
+    }
 }

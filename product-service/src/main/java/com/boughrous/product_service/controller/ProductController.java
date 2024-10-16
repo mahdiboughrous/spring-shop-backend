@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
->>>>>>> 2d1ab25fd92f1dd0d934d43524f07cecec6c14f1
 
 import com.boughrous.product_service.dto.CreateProductRequest;
 import com.boughrous.product_service.model.Product;
@@ -34,7 +28,6 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-<<<<<<< HEAD
     private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @GetMapping
@@ -46,13 +39,6 @@ public class ProductController {
         }
 
         return products;
-=======
-
-    @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
-        return ResponseEntity.ok().body(products);
->>>>>>> 2d1ab25fd92f1dd0d934d43524f07cecec6c14f1
     }
 
     @GetMapping("/{id}")

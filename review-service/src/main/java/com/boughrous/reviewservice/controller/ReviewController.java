@@ -29,20 +29,23 @@ public class ReviewController {
 
 
     @GetMapping
-    public ResponseEntity<List<Review>> getAllReviews() {
+    public List<Review> getAllReviews() {
         List<Review> reviews = reviewService.getAllReviews();
-        return ResponseEntity.ok().body(reviews);
+        if(!reviews.isEmpty()) {
+            System.out.println(reviews.get(0).toString());
+        }
+        return reviews;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Review> getReviewById(@PathVariable int id) {
+    public Review getReviewById(@PathVariable int id) {
 
         Review review = reviewService.getReviewById(id);
 
-        return ResponseEntity.ok().body(review);
+        return review;
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> createReview(@RequestBody CreateReviewRequest newReview) {
+    public void createReview(@RequestBody CreateReviewRequest newReview) {
 
         Review review = new Review();
         review.setProductId(newReview.getProductId());
@@ -55,7 +58,7 @@ public class ReviewController {
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "Review created successfully");
-        return ResponseEntity.ok().body(response);
+
     }
 
     @PutMapping("/{id}")
