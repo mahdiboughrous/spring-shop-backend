@@ -27,47 +27,43 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-
     @GetMapping
-    public List<Review> getAllReviews() {
+    public ResponseEntity<List<Review>> getAllReviews() {
         List<Review> reviews = reviewService.getAllReviews();
         if(!reviews.isEmpty()) {
             System.out.println(reviews.get(0).toString());
         }
-        return reviews;
+        return ResponseEntity.ok(reviews);
     }
+
     @GetMapping("/{id}")
-    public Review getReviewById(@PathVariable int id) {
-
+    public ResponseEntity<Review> getReviewById(@PathVariable int id) {
         Review review = reviewService.getReviewById(id);
-
-        return review;
+        return ResponseEntity.ok(review);
     }
 
     @PostMapping
-    public void createReview(@RequestBody CreateReviewRequest newReview) {
-
+    public ResponseEntity<Map<String, String>> createReview(@RequestBody CreateReviewRequest newReview) {
         Review review = new Review();
         review.setProductId(newReview.getProductId());
         review.setAuthor(newReview.getAuthor());
         review.setSubject(newReview.getSubject());
         review.setContent(newReview.getContent());
 
-
         reviewService.createReview(review);
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "Review created successfully");
-
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable int id, @RequestBody Review reviewDetails) {
-        // Return updated mock data
         Review updatedReview = new Review(id, reviewDetails.getProductId(), reviewDetails.getAuthor(), reviewDetails.getSubject(), reviewDetails.getContent());
         reviewService.updateReview(id, reviewDetails);
         return ResponseEntity.ok(updatedReview);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable int id) {

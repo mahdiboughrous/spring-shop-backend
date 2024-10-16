@@ -31,14 +31,14 @@ public class ProductController {
     private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @GetMapping
-    public List<Product> getAllProducts() {
+    public ResponseEntity<List<Product>> getAllProducts() {
 
         List<Product> products = productService.getAllProducts();
         if (!products.isEmpty()) {
             logger.info(products.get(0).toString());
         }
 
-        return products;
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping("/{id}")
